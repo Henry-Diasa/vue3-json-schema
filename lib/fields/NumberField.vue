@@ -14,6 +14,7 @@ export default defineComponent({
         props.onChange(undefined);
       } else {
         props.onChange(value);
+        console.log(value);
       }
     };
     return {
