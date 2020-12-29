@@ -24,8 +24,5 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
-  "exclude": ["node_modules"],
-  "rules": {
-    "@typescript-eslint/no-explicit-any": "off"
-  }
+  "exclude": ["node_modules"]
 }
