@@ -1,8 +1,7 @@
 import { defineComponent, ref, Ref, reactive, watchEffect } from "vue";
 import { createUseStyles } from "vue-jss";
-
 import MonacoEditor from "./components/MonacoEditor";
-
+import SchemaForm from "../lib";
 // import CustomFormat from './plugins/custom-formats'
 // import CustomKeyword from './plugins/custom-keyworkds'
 
@@ -140,12 +139,16 @@ export default defineComponent({
     function handleCodeChange(
       filed: "schema" | "data" | "uiSchema",
       value: string
-    ) {
+    ): void {
+      console.log(filed, value, 999);
       try {
         const json = JSON.parse(value);
+        console.log(json, 888);
         demo[filed] = json;
         (demo as any)[`${filed}Code`] = value;
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     }
 
     const handleSchemaChange = (v: string) => handleCodeChange("schema", v);
@@ -162,7 +165,6 @@ export default defineComponent({
       const selected = selectedRef.value;
 
       console.log(methodRef);
-
       return (
         <>
           <div class={classes.menu}>
@@ -208,6 +210,11 @@ export default defineComponent({
               <div class={classes.form}>
                 <div style={{ marginTop: "20px" }}>
                   <button onClick={handleValidate}>校验</button>
+                  <SchemaForm
+                    schema={demo.schema!}
+                    onChange={handleChange}
+                    value={demo.data}
+                  />
                 </div>
               </div>
             </div>

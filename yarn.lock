@@ -6671,6 +6671,13 @@ mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
 
+monaco-editor-webpack-plugin@^2.1.0:
+  version "2.1.0"
+  resolved "http://192.168.14.11:8888/monaco-editor-webpack-plugin/-/monaco-editor-webpack-plugin-2.1.0.tgz#216bd35512a282beac7befd2fcdc5adb110403ff"
+  integrity sha1-IWvTVRKigr6se+/S/Nxa2xEEA/8=
+  dependencies:
+    loader-utils "^2.0.0"
+
 monaco-editor@^0.21.2:
   version "0.21.2"
   resolved "http://192.168.14.11:8888/monaco-editor/-/monaco-editor-0.21.2.tgz#37054e63e480d51a2dd17d609dcfb192304d5605"
