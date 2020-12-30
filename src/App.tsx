@@ -209,7 +209,7 @@ export default defineComponent({
               </div>
               <div class={classes.form}>
                 <div style={{ marginTop: "20px" }}>
-                  <button onClick={handleValidate}>校验</button>
+                  {/* <button onClick={handleValidate}>校验</button> */}
                   <SchemaForm
                     schema={demo.schema!}
                     onChange={handleChange}

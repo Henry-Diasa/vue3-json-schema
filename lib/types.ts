@@ -1,4 +1,4 @@
-import { PropType } from "vue";
+import { PropType, DefineComponent } from "vue";
 // 枚举类型
 export enum SchemaTypes {
   "NUMBER" = "number",
@@ -11,24 +11,39 @@ export enum SchemaTypes {
 type SchemaRef = { $ref: string };
 // Schema接口
 export interface Schema {
-  type: SchemaTypes | string;
+  type?: SchemaTypes | string;
   const?: any;
   format?: string;
+
+  title?: string;
   default?: any;
+
   properties?: {
-    [key: string]: Schema | SchemaRef;
+    [key: string]: Schema;
   };
   items?: Schema | Schema[] | SchemaRef;
+  uniqueItems?: any;
   dependencies?: {
     [key: string]: string[] | Schema | SchemaRef;
   };
   oneOf?: Schema[];
-  // vjsf?: VueJsonSchemaConfig;
+  anyOf?: Schema[];
+  allOf?: Schema[];
+  vjsf?: [];
   required?: string[];
   enum?: any[];
+  enumNames?: any[];
   enumKeyValue?: any[];
   additionalProperties?: any;
   additionalItems?: Schema;
+
+  minLength?: number;
+  maxLength?: number;
+  minimun?: number;
+  maximum?: number;
+  multipleOf?: number;
+  exclusiveMaximum?: number;
+  exclusiveMinimum?: number;
 }
 
 export const FieldPropsDefine = {
@@ -42,5 +57,12 @@ export const FieldPropsDefine = {
   onChange: {
     type: Function as PropType<(v: any) => void>,
     required: true
+  },
+  rootSchema: {
+    type: Object as PropType<Schema>,
+    required: true
   }
 } as const; // 必须声明为const只读 这样required属性值才会生效 也就是必填项
+
+// 定义组件
+export type CommonFieldType = DefineComponent<typeof FieldPropsDefine>;

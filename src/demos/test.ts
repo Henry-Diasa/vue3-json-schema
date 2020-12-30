@@ -1,7 +1,7 @@
 export default {
   name: "Test",
   schema: {
-    type: "number",
+    type: "object",
     properties: {
       array: {
         type: "array",

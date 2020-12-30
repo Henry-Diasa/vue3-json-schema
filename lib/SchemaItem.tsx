@@ -1,14 +1,22 @@
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
+import component from "./fields/NumberField.vue";
 import NumberField from "./fields/NumberField.vue";
 import StringField from "./fields/StringField.vue";
+import ObjectField from "./fields/ObjectField";
 import { SchemaTypes, FieldPropsDefine } from "./types";
+import { retrieveSchema } from "./utils";
 export default defineComponent({
   name: "SchemaItem",
   props: FieldPropsDefine,
   setup(props) {
+    // 计算属性 防止每次渲染都需要重新生成函数
+    const retrievedSchemaRef = computed(() => {
+      const { schema, rootSchema, value } = props;
+      return retrieveSchema(schema, rootSchema, value);
+    });
     return () => {
-      const { schema } = props;
-      // Type没有指定 需要猜测用户输入
+      const { schema, rootSchema, value } = props;
+      const retrievedSchema = retrievedSchemaRef.value;
       const type = schema.type;
       let Component: any;
       switch (type) {
@@ -18,11 +26,14 @@ export default defineComponent({
         case SchemaTypes.NUMBER:
           Component = NumberField;
           break;
+        case SchemaTypes.OBJECT:
+          Component = ObjectField;
+          break;
         default: {
           console.warn(`${type} is not supported`);
         }
       }
-      return <Component {...props} />;
+      return <Component {...props} schema={retrievedSchema} />;
     };
   }
 });
