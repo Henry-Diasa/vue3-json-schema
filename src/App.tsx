@@ -1,7 +1,8 @@
 import { defineComponent, ref, Ref, reactive, watchEffect } from "vue";
 import { createUseStyles } from "vue-jss";
 import MonacoEditor from "./components/MonacoEditor";
-import SchemaForm from "../lib";
+import SchemaForm, { ThemeProvider } from "../lib";
+import themeDefault from "../lib/theme-default";
 // import CustomFormat from './plugins/custom-formats'
 // import CustomKeyword from './plugins/custom-keyworkds'
 
@@ -210,11 +211,13 @@ export default defineComponent({
               <div class={classes.form}>
                 <div style={{ marginTop: "20px" }}>
                   {/* <button onClick={handleValidate}>校验</button> */}
-                  <SchemaForm
-                    schema={demo.schema!}
-                    onChange={handleChange}
-                    value={demo.data}
-                  />
+                  <ThemeProvider theme={themeDefault as any}>
+                    <SchemaForm
+                      schema={demo.schema!}
+                      onChange={handleChange}
+                      value={demo.data}
+                    />
+                  </ThemeProvider>
                 </div>
               </div>
             </div>

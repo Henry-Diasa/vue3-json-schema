@@ -1,10 +1,12 @@
 {
-  "name": "aa",
+  "name": "vue3-json-schema",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build:core": "TYPE=lib vue-cli-service build --target lib --name index --no-clean lib/index.ts",
+    "build:theme": "TYPE=lib vue-cli-service build --target lib --name theme-default/index --no-clean lib/theme-default/index.tsx",
+    "build": "rimraf dist && yarn build:core && yarn build:theme",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
@@ -22,6 +24,7 @@
     "jss-preset-default": "^10.5.0",
     "lodash": "^4.17.20",
     "lodash.union": "^4.6.0",
+    "rimraf": "^3.0.2",
     "vue": "^3.0.0",
     "vue-jss": "^0.0.4"
   },
